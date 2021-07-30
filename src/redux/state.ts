@@ -1,9 +1,13 @@
 import { combineReducers, createStore } from 'redux';
 import authReducer from './authReducer';
+import { reducer as fromReducer } from 'redux-form';
+import genresReducer from './genreReducer';
 
 
 let rootReducer = combineReducers({
-  auth: authReducer
+  auth: authReducer,
+  genres: genresReducer,
+  form: fromReducer
 });
 
 type RootReducerType = typeof rootReducer

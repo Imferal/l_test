@@ -11,3 +11,8 @@ export type BookType = {
     }
   ]
 }
+
+export type GenreType = {
+  "id": number,
+  "name": "string"
+}

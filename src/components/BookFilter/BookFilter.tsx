@@ -1,6 +1,11 @@
 import { Button, Container, FloatingLabel, Form, Row, Col } from "react-bootstrap";
+import { GenreType } from "../../types/types";
 
-function BookFilter() {
+type Props = {
+  genres: Array<GenreType> | null
+}
+
+function BookFilter(props: Props) {
   return (
     <Col sm={12} md={6}>
       <Container className="px-0 py-3">
@@ -33,10 +38,7 @@ function BookFilter() {
               <Col xs={12} md={4}>
                 <Form.Label>
                   <Form.Select aria-label="Default select example">
-                    <option>Жанр</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    {props.genres !== null && props.genres.map(genre => <option>{genre.name}</option>)}
                   </Form.Select>
                 </Form.Label>
               </Col>

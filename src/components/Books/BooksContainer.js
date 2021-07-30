@@ -3,7 +3,8 @@ import React from "react";
 // import { useEffect } from "react";
 // import { BookType } from "../../types/types";
 import { connect } from "react-redux";
-import { setBooks, setFetchingStatus } from "../../redux/authReducer";
+import { setBooks, setBooksFetchingStatus } from "../../redux/authReducer";
+import apiErr from "../../_helpers/apiErr";
 import Books from "./Books";
 
 // type Props = {
@@ -14,33 +15,22 @@ import Books from "./Books";
 class BooksContainer extends React.Component {
 
   getBooks() {
-    if (this.props.books === null) {
-      this.props.setFetchingStatus(true)
-      axios.get('https://cors-anywhere.herokuapp.com/https://fosius-books.herokuapp.com/books')
-        .then(response => {
-          this.props.setBooks(response.data)
-          this.props.setFetchingStatus(false)
+    this.props.setBooksFetchingStatus(true)
+    axios.get('https://cors-anywhere.herokuapp.com/https://fosius-books.herokuapp.com/books')
+      .then(response => {
+        this.props.setBooks(response.data)
+        this.props.setBooksFetchingStatus(false)
 
-        })
-        .catch((error) => {
-          // Что-то пошло не так 😨
-          if (error.response) {
-            console.log(error.response.data);
-            console.log(error.response.status);
-            console.log(error.response.headers);
-          } else if (error.request) {
-            console.log(error.request);
-          } else {
-            console.log('Error', error.message);
-          }
-          console.log(error.config);
-          debugger
-        });
-    }
+      })
+      .catch((error) => {
+        apiErr(error)
+      });
   }
 
   componentDidMount() {
-    this.getBooks()
+    if (this.props.books === null && this.props.isBooksFetching === false) {
+      this.getBooks()
+    }
   }
 
   render() {
@@ -54,9 +44,9 @@ class BooksContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    isFetching: state.auth.isFetching,
+    isBooksFetching: state.auth.isBooksFetching,
     books: state.auth.books
   }
 }
 
-export default connect(mapStateToProps, { setBooks, setFetchingStatus })(BooksContainer)
+export default connect(mapStateToProps, { setBooks, setBooksFetchingStatus })(BooksContainer)

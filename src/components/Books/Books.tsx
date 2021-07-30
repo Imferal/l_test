@@ -2,7 +2,7 @@ import Paginator from '../Paginator/Paginator';
 import { Card, Button, Col, Row } from 'react-bootstrap';
 import CardHeader from 'react-bootstrap/CardHeader';
 import { BookType } from '../../types/types';
-// import keyGen from '../../_helpers/keyGen';
+import keyGen from '../../_helpers/keyGen';
 
 type Props = {
   books: Array<BookType> | null
@@ -13,7 +13,7 @@ function Books(props: Props) {
   let booksJsx = [<p>Загружается...</p>]
 
   if (props.books !== null) {
-    booksJsx = props.books.map((book, i) => <Col sm={12} md={6} lg={4} as="li" className="mb-3" key='42'>
+    booksJsx = props.books.map((book, i) => <Col sm={12} md={6} lg={4} as="li" className="mb-3" key={keyGen()}>
       <Card as="article">
         <CardHeader>
           <Row>
@@ -34,7 +34,6 @@ function Books(props: Props) {
       </Card>
     </Col>
     )
-    debugger
   }
 
   return (
