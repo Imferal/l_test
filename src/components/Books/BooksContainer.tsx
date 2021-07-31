@@ -15,7 +15,6 @@ type Props = {
 
 const BooksContainer = function (props: Props) {
   const getBooks = () => {
-
     props.setBooksFetchingStatus(true);
     axios.get(`${baseURL}books`)
       .then(response => {
