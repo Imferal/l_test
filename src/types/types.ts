@@ -4,15 +4,18 @@ export type BookType = {
   "name": string,
   "date": number,
   "description": string,
-  "genre": [
-    {
-      "id": number,
-      "name": string
-    }
-  ]
+  "genre": Array<GenreType>
 }
 
 export type GenreType = {
   "id": number,
   "name": "string"
+}
+
+export type FormData = {
+  name: string,
+  author: string,
+  description: string,
+  date: number,
+  genreIds: Array<number>
 }

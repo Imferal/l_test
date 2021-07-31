@@ -6,10 +6,10 @@ import keyGen from '../../_helpers/keyGen';
 
 type Props = {
   books: Array<BookType> | null
+  deleteBook: (id: number) => void
 }
 
 function Books(props: Props) {
-
   let booksJsx = [<p>Загружается...</p>]
 
   if (props.books !== null) {
@@ -21,7 +21,7 @@ function Books(props: Props) {
               <h4>{book.name}</h4>
             </Col>
             <Col md="auto">
-              <Button variant="link">Удалить</Button>
+              <Button variant="link" onClick={() => props.deleteBook(book.id)}>Удалить</Button>
             </Col>
           </Row>
         </CardHeader>

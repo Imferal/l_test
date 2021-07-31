@@ -16,7 +16,6 @@ const initialState: genresInitialStateType = {
 const genresReducer = (state = initialState, action: any): genresInitialStateType => {
   switch (action.type) {
     case SET_GENRES: {
-      debugger
       return {
         ...state,
         genres: [...action.genres]
