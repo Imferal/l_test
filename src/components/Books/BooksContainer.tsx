@@ -1,7 +1,7 @@
 import { BookType } from "../../types/types";
 import axios from "axios";
 import { connect } from "react-redux";
-import { apiErr, baseURL } from "../../api/api";
+import { apiErr, baseURL } from "../../helpers/api";
 import { setBooks, setBooksFetchingStatus, setPageLimit } from "../../redux/booksReducer";
 import Books from "./Books";
 import { AppStateType } from "../../redux/state";

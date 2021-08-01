@@ -11,8 +11,6 @@ type Props = {
 }
 
 const BookFilterContainer = (props: Props) => {
-
-
   return <BookFilter {...props} />
 }
 

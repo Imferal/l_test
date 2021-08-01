@@ -5,7 +5,7 @@ import { BookType, GenreType } from "../../types/types";
 import { connect } from "react-redux";
 import { setBooks, setBooksFetchingStatus, setPageLimit } from "../../redux/booksReducer";
 import { setGenres, setGenresFetchingStatus } from "../../redux/genreReducer";
-import { apiErr, baseURL } from "../../api/api";
+import { apiErr, baseURL } from "../../helpers/api";
 
 
 type Props = {

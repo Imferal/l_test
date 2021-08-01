@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Container, Col } from "react-bootstrap";
-import { apiErr, baseURL } from "../../api/api";
+import { apiErr, baseURL } from "../../helpers/api";
 import { BookType, GenreType } from "../../types/types";
 import BookFilterReduxForm from "./BookFilterReduxForm";
 

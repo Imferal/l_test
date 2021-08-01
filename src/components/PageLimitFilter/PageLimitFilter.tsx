@@ -19,7 +19,7 @@ const PageLimitFilter = (props: Props) => {
       <ButtonGroup size="sm" aria-label="Сколько книг будет показано на странице">
         {
           props.pageLimitVariants.map((limit) => {
-            return <Button onClick={() => props.setPageLimit(limit)} variant={limit === props.pageLimit ? "primary" : "primary-outline"}>{limit}</Button>
+            return <Button onClick={() => props.setPageLimit(limit)} variant={limit === props.pageLimit ? "primary" : "primary-outline"} key={limit}>{limit}</Button>
           })
         }
       </ButtonGroup>

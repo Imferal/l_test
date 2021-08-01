@@ -1,3 +1,26 @@
+# Установка и запуск aka Getting Started
+
+Приложение написано на React Create App, поэтому:
+
+1. git init
+
+2. git pull https://github.com/Imferal/l_test.git
+
+3. yarn install
+
+4. На странице https://cors-anywhere.herokuapp.com/corsdemo нажать на кнопку
+
+5. yarn start
+
+# Технологии aka Стэк
+
+Create-React-App\
+Стейт - Redux\
+Работа с API - Axios\
+Стили - React-Bootstrap (разбирался с нуля)\
+Формы - Redux-Form (разбирался с нуля)\
+Typescript (разбирался почти с нуля)
+
 # Возможности приложения
 
 1. Получить список всех книг - это происходит автоматически при запуске. Также, если применить незаполненный фильтр.
@@ -6,35 +29,15 @@
 
 3. Создавать новые книги.
 
-# Getting Started with Create React App
+4. Редактировать книги (реализация так себе, но работает) :)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+5. Пагинация с возможностью менять количество одновременно отображаемых книг
 
-## Available Scripts
+6. Функция проверки дублей ID у жанров - исправляет баг, присутствующий на сервере, а также защищает от подобных ситуаций в будущем
 
-In the project directory, you can run:
+# Что НЕ сделано, но очень хотелось (не хватило времени)
 
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Работа с сервером не вынесена на отдельный уровень, в коде есть дубли, связанные с запросом книг.
+2. При запуске появляются ворнинги. Причина: для работы с формами использована библиотека redux-form, которая в настоящий момент у старела. Нужно было использовать Formik, но осознание проблемы пришло слишком поздно, в последнюю ночь, если быть точным.
+3. Редактивание книг сделано неудобно.
+4. Не реализована валидация полей формы перед отправкой.

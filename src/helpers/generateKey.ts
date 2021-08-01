@@ -3,6 +3,6 @@ function keyClosure() {
   return () => key++
 }
 
-const keyGen = keyClosure()
+const generateKey = keyClosure()
 
-export default keyGen
+export default generateKey

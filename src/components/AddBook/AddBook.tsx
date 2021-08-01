@@ -1,9 +1,8 @@
-// @ts-nocheck
 import Container from "react-bootstrap/Container"
 import { Col } from "react-bootstrap";
 import AddBookReduxForm from "./AddBookReduxForm";
-import { apiErr, baseURL } from "../../api/api";
-import { BookType, FormData } from "../../types/types";
+import { apiErr, baseURL } from "../../helpers/api";
+import { BookType, FormData, GenreType } from "../../types/types";
 import axios from "axios";
 
 type Props = {
@@ -25,8 +24,7 @@ function AddBook(props: Props) {
   }
 
   const addBook = (formData: FormData) => {
-    // Переводим ID жанров в массив перед отправкой
-    debugger
+    // Переводим ID жанров в массив перед отправкой    
     formData.genreIds = formData.genreIds.map(Number);
     // Проверяем, надо ли создать новую книгу или изменить существующую
     if (formData.ID == null) {
@@ -41,7 +39,7 @@ function AddBook(props: Props) {
     }
   }
 
-  const onSubmit = (formData: FormData) => {
+  const onSubmit = (formData: any) => {
     addBook(formData)
   }
 
