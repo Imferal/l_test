@@ -13,9 +13,10 @@ export type GenreType = {
 }
 
 export type FormData = {
-  name: string,
-  author: string,
-  description: string,
-  date: number,
+  ID: number
+  name: string
+  author: string
+  description: string
+  date: number
   genreIds: Array<number>
 }

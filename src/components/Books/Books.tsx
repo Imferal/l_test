@@ -1,19 +1,25 @@
-import Paginator from '../Paginator/Paginator';
-import { Card, Button, Col, Row } from 'react-bootstrap';
+
+import * as React from 'react';
+import { Card, Button, Col, Row, Container, Badge } from 'react-bootstrap';
 import CardHeader from 'react-bootstrap/CardHeader';
 import { BookType } from '../../types/types';
-import keyGen from '../../_helpers/keyGen';
+import PageLimitFilter from '../PageLimitFilter/PageLimitFilter';
+import PaginationContainer from '../Paginator/PaginationContainer';
 
 type Props = {
   books: Array<BookType> | null
   deleteBook: (id: number) => void
+  activePage: number
+  pageLimit: number
 }
 
 function Books(props: Props) {
-  let booksJsx = [<p>Загружается...</p>]
+  let booksJsx = [<p key="0">Загружается...</p>]
 
   if (props.books !== null) {
-    booksJsx = props.books.map((book, i) => <Col sm={12} md={6} lg={4} as="li" className="mb-3" key={keyGen()}>
+    let booksOnPage = props.books.slice(((props.activePage - 1) * props.pageLimit), props.activePage * props.pageLimit)
+
+    booksJsx = booksOnPage.map((book) => <Col sm={12} md={6} lg={4} as="li" className="mb-3" key={book.id}>
       <Card as="article">
         <CardHeader>
           <Row>
@@ -21,28 +27,46 @@ function Books(props: Props) {
               <h4>{book.name}</h4>
             </Col>
             <Col md="auto">
-              <Button variant="link" onClick={() => props.deleteBook(book.id)}>Удалить</Button>
+              <Button
+                variant="link"
+                onClick={() => props.deleteBook(book.id)}
+                className="px-0">Удалить
+              </Button>
             </Col>
           </Row>
         </CardHeader>
-        <p className="py-3 px-sm-3">{book.author}</p>
-        <p className="py-1 px-sm-3 font-italic"><em>{book.description}</em></p>
-        <Row >
-          <Col className="py-1 px-sm-3"><p className="py-1 px-sm-3 text-muted">{book.genre[0].name}</p></Col>
-          <Col className="py-1 px-sm-3 text-right"><p className="py-1 px-sm-3 text-muted">{book.date}</p></Col>
-        </Row>
+        <p className="pt-3 px-3">{book.author}</p>
+        <p className="px-3 font-italic"><em>{book.description}</em></p>
+        <Container className="d-flex justify-content-between px-3">
+          <Col className="pr-3">
+
+            {book.genre.map((genre) => {
+              return <Badge
+                bg="success"
+                className="py-1 pb-2 px-sm-3 mr-1">{genre.name}</Badge>
+            })}
+
+          </Col>
+          <Col className="text-right">
+            <p className="text-end">{book.date}</p>
+          </Col>
+        </Container>
+        <Container className="px-3 pb-3">
+          <span className="text-muted">ID: {book.id}</span>
+        </Container>
       </Card>
-    </Col>
+    </Col >
     )
   }
 
   return (
-    <>
+    <React.Fragment>
+      <PageLimitFilter />
       <Row className="px-0 pt-3" as="ul">
         {booksJsx}
       </Row>
-      <Paginator />
-    </>
+      <PaginationContainer />
+    </React.Fragment>
   )
 }
 

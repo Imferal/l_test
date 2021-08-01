@@ -4,12 +4,16 @@ import Row from "react-bootstrap/Row";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import { Col } from "react-bootstrap";
 import { Field, reduxForm } from "redux-form";
+import { GenreType } from "../../types/types";
 
+type Props = {
+  handleSubmit: any
+  genres: Array<GenreType> | null
+}
 
-
-const AddBookForm = (props) => {
-
+const AddBookForm = (props: Props) => {
   // Совместимость React-Bootstrap и Redux-Form
+  // @ts-ignore
   const FieldInput = ({ input, type, placeholder, min, max }) => {
     return (
       <Form.Control
@@ -22,19 +26,18 @@ const AddBookForm = (props) => {
     )
   }
 
+  // @ts-ignore
   const FieldSelect = ({ input, placeholder }) => {
     return (
       <Form.Select
         placeholder={placeholder}
-        value={input.value}
         multiple={true}
         onChange={input.onChange}>
-        <option value="" disabled selected>Выберите жанр</option>
-        {props.genres !== null && props.genres.map(genre => <option value={genre.id}>{genre.name}</option>)}
+        <option key="0" value="preset" disabled>Выберите жанр</option>
+        {props.genres !== null && props.genres.map(genre => <option key={genre.id} value={genre.id}>{genre.name}</option>)}
       </Form.Select>
     )
   }
-
 
   return (
     <Form onSubmit={props.handleSubmit}>
@@ -61,6 +64,16 @@ const AddBookForm = (props) => {
             </Form.Label>
           </Col>
         </Row>
+        <Row md={12}>
+          <Col md={4}>
+            <Form.Label className="d-flex align-items-center mb-0">
+              <Field name="ID" type="number" component={FieldInput} placeholder="Id" />
+            </Form.Label>
+          </Col>
+          <Col md={8} className="d-flex align-items-stretch">
+            <span className="d-flex align-items-center py-1">Укажите Id книги, чтобы изменить её</span>
+          </Col>
+        </Row>
       </Form.Group>
 
       <Button variant="primary" type="submit">
@@ -70,6 +83,7 @@ const AddBookForm = (props) => {
   )
 }
 
+// @ts-ignore
 const AddBookReduxForm = reduxForm({ form: 'addBook' })(AddBookForm)
 
 export default AddBookReduxForm;

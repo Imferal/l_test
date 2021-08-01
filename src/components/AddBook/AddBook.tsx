@@ -1,11 +1,17 @@
+// @ts-nocheck
 import Container from "react-bootstrap/Container"
 import { Col } from "react-bootstrap";
 import AddBookReduxForm from "./AddBookReduxForm";
 import { apiErr, baseURL } from "../../api/api";
-import { FormData } from "../../types/types";
+import { BookType, FormData } from "../../types/types";
 import axios from "axios";
 
-type Props = any
+type Props = {
+  genres: Array<GenreType> | null
+  setBooks: (books: Array<BookType>) => void
+  setPageLimit: (pageLimit: number) => void
+  setBooksFetchingStatus: (isBooksFetching: boolean) => void
+}
 
 function AddBook(props: Props) {
   const getBooks = () => {
@@ -19,10 +25,20 @@ function AddBook(props: Props) {
   }
 
   const addBook = (formData: FormData) => {
+    // Переводим ID жанров в массив перед отправкой
+    debugger
     formData.genreIds = formData.genreIds.map(Number);
-    axios.post(`${baseURL}books`, formData)
-      .then(() => getBooks())
-      .catch((error) => apiErr(error));
+    // Проверяем, надо ли создать новую книгу или изменить существующую
+    if (formData.ID == null) {
+      axios.post(`${baseURL}books`, formData)
+        .then(() => getBooks())
+        .catch((error) => apiErr(error));
+    }
+    else {
+      axios.patch(`${baseURL}books/${formData.ID}`, formData)
+        .then(() => getBooks())
+        .catch((error) => apiErr(error));
+    }
   }
 
   const onSubmit = (formData: FormData) => {

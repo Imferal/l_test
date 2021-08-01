@@ -1,11 +1,11 @@
 import { combineReducers, createStore } from 'redux';
-import authReducer from './authReducer';
+import booksReducer from './booksReducer';
 import { reducer as fromReducer } from 'redux-form';
 import genresReducer from './genreReducer';
 
 
 let rootReducer = combineReducers({
-  auth: authReducer,
+  books: booksReducer,
   genres: genresReducer,
   form: fromReducer
 });

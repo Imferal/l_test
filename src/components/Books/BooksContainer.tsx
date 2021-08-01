@@ -2,18 +2,21 @@ import { BookType } from "../../types/types";
 import axios from "axios";
 import { connect } from "react-redux";
 import { apiErr, baseURL } from "../../api/api";
-import { setBooks, setBooksFetchingStatus } from "../../redux/authReducer";
+import { setBooks, setBooksFetchingStatus, setPageLimit } from "../../redux/booksReducer";
 import Books from "./Books";
 import { AppStateType } from "../../redux/state";
 
 type Props = {
   books: Array<BookType> | null
   isBooksFetching: boolean
+  activePage: number
+  pageLimit: number
   setBooks: (books: Array<BookType>) => void
+  setPageLimit: (pageLimit: number) => void
   setBooksFetchingStatus: (isBooksFetching: boolean) => void
 }
 
-const BooksContainer = function (props: Props) {
+const BooksContainer = (props: Props) => {
   const getBooks = () => {
     props.setBooksFetchingStatus(true);
     axios.get(`${baseURL}books`)
@@ -36,9 +39,11 @@ const BooksContainer = function (props: Props) {
 
 const mapStateToProps = (state: AppStateType) => {
   return {
-    isBooksFetching: state.auth.isBooksFetching,
-    books: state.auth.books
+    isBooksFetching: state.books.isBooksFetching,
+    books: state.books.books,
+    pageLimit: state.books.pageLimit,
+    activePage: state.books.activePage,
   }
 }
 
-export default connect(mapStateToProps, { setBooks, setBooksFetchingStatus })(BooksContainer)
+export default connect(mapStateToProps, { setBooks, setBooksFetchingStatus, setPageLimit })(BooksContainer)
