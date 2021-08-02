@@ -12,8 +12,11 @@ type Props = {
 
 function BookFilter(props: Props) {
 
+  // Отправка данных фильтра на сервер
   const onSubmit = (formData: any) => {
+    // Формирование строки запроса
     let filter = ``
+    // Склеиваем данные из формы в строку запроса
     for (let key in formData) {
       if (key !== 'genreIds') {
         filter += `${key}=${formData[key]}&`
@@ -21,16 +24,16 @@ function BookFilter(props: Props) {
         filter += formData[key].map((id: number) => `genreIds=${id}&`)
       }
     }
-    // Удаляем запятые из запроса
+    // Удаляем запятые
     filter = filter.replace(/,/g, '')
-    // Если в конце стоит амперсанд - удаляем его
+    // Если в конце стоит амперсанд - удаляем и его
     if (filter[filter.length - 1] === '&') {
       filter = filter.slice(0, -1)
     }
+    // Отправляем запрос на сервер
     props.setBooksFetchingStatus(true);
     axios.get(`${baseURL}books/?${filter}`)
       .then(response => {
-
         props.setBooks(response.data);
         props.setBooksFetchingStatus(false);
       })

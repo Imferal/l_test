@@ -42,12 +42,15 @@ const AddBookContainer = (props: Props) => {
     return (genresToCheck)
   }
 
+  // Загружаем данные о жанрах и отправляем их проверяться на дубли
   const getGenres = () => {
     props.setGenresFetchingStatus(true)
     axios
       .get(`${baseURL}genre`)
       .then(response => {
+        // Запускаем проверку
         let correctedGenres = mergeSameGenreIds(response.data)
+        // Если всё хорошо - отправляем в стейт
         props.setGenres(correctedGenres)
         props.setGenresFetchingStatus(false)
       })
@@ -56,6 +59,7 @@ const AddBookContainer = (props: Props) => {
       });
   }
 
+  // Если жанры не загружены и не загружаются сейчас - запускаем загрузку
   if (props.genres === null && props.isGenresFetching === false) {
     getGenres()
   }

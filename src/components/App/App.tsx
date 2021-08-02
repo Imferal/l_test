@@ -10,9 +10,12 @@ function App() {
     <Container className="p-3">
       <h1 className="p-3 text-center">Книжная полка</h1>
       <Row>
+        {/* Форма добавления новой книги */}
         <AddBookContainer />
+        {/* Фильтр */}
         <BookFilterContainer />
       </Row>
+      {/* Область показа загруженных книг */}
       <BooksContainer />
     </Container >
   );

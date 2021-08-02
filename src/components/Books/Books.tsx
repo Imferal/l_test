@@ -5,7 +5,7 @@ import CardHeader from 'react-bootstrap/CardHeader';
 import generateKey from '../../helpers/generateKey';
 import { BookType } from '../../types/types';
 import PageLimitFilter from '../PageLimitFilter/PageLimitFilter';
-import PaginationContainer from '../Paginator/PaginationContainer';
+import PaginationContainer from '../Paginator/Pagination';
 
 type Props = {
   books: Array<BookType> | null
@@ -18,6 +18,7 @@ function Books(props: Props) {
   let booksJsx = [<p key="42">Загружается...</p>]
 
   if (props.books !== null) {
+    // Создаём JSX с карточками книг
     let booksOnPage = props.books.slice(((props.activePage - 1) * props.pageLimit), props.activePage * props.pageLimit)
     booksJsx = booksOnPage.map((book) => <Col sm={12} md={6} lg={4} as="li" className="mb-3" key={book.id}>
       <Card as="article">

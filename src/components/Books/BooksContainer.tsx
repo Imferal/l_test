@@ -17,6 +17,7 @@ type Props = {
 }
 
 const BooksContainer = (props: Props) => {
+  // Загружаем книги с сервера
   const getBooks = () => {
     props.setBooksFetchingStatus(true);
     axios.get(`${baseURL}books`)
@@ -27,6 +28,7 @@ const BooksContainer = (props: Props) => {
       .catch((error) => apiErr(error));
   }
 
+  // Если нажата кнопка "Удалить"
   const deleteBook = (id: number) => {
     axios.delete(`${baseURL}books/${id}`).then(() => getBooks())
       .catch((error) => apiErr(error));

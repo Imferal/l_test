@@ -15,6 +15,7 @@ const initialState: genresInitialStateType = {
 
 const genresReducer = (state = initialState, action: any): genresInitialStateType => {
   switch (action.type) {
+    // Сохраняем загруженные жанры в стейт
     case SET_GENRES: {
       return {
         ...state,
@@ -22,6 +23,7 @@ const genresReducer = (state = initialState, action: any): genresInitialStateTyp
       }
     }
 
+    // Устанавливаем флаг загрузки жанров
     case SET_GENRES_FETCHING_STATUS: {
       return { ...state, isGenresFetching: action.isGenresFetching }
     }

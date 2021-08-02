@@ -10,9 +10,6 @@ type Props = {
 }
 
 const PageLimitFilter = (props: Props) => {
-
-
-
   return (
     <Container className="px-0 pt-3">
       <span className="justify-content-md-center">Вывести на странице: </span>

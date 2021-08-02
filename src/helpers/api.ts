@@ -1,5 +1,7 @@
+// Базовый URL с прокси
 export const baseURL = 'https://cors-anywhere.herokuapp.com/https://fosius-books.herokuapp.com/'
 
+// Стандартная функция вывода ошибок запросов в консоль
 export const apiErr = function (error: any) {
   // Что-то пошло не так 😨
   if (error.response) {

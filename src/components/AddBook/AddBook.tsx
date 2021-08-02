@@ -13,6 +13,7 @@ type Props = {
 }
 
 function AddBook(props: Props) {
+  // Загружаем книги
   const getBooks = () => {
     props.setBooksFetchingStatus(true);
     axios.get(`${baseURL}books`)
@@ -23,6 +24,7 @@ function AddBook(props: Props) {
       .catch((error) => apiErr(error));
   }
 
+// Добавляем новую книгу
   const addBook = (formData: FormData) => {
     // Переводим ID жанров в массив перед отправкой    
     formData.genreIds = formData.genreIds.map(Number);
@@ -39,6 +41,7 @@ function AddBook(props: Props) {
     }
   }
 
+// Событие при клике на кнопку 
   const onSubmit = (formData: any) => {
     addBook(formData)
   }
